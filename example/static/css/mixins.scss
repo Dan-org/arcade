@@ -1,0 +1,61 @@
+// VARIABLES
+
+$dark:			#151415;
+$less-dark:		#222222;
+$light:			#C9C9C9;
+$blue:			#407CCF;
+$green:			#BBF15F;
+
+$black:         #000;
+$white:         #fff;
+$grey:			#343434; //copy & dark grey elements
+$orange:        #f79032; //link color
+$button-color:	#078be0;
+
+// buttons
+$button-black:	#000000;
+$button-dark:	#303030;
+$button-border:	#808080;
+
+$button-hover-dark:		#666;
+$button-hover-light:	#ddd;
+
+
+$font-averoman: AvenirLT-Roman, sans-serif;
+$font-avehvy: AvenirLT-Black, sans-serif;
+$font-georgia: Georgia, serif;
+
+$margin: 20px 20px 0 20px;
+
+$img-path: '../img'; 
+
+$arrow-down-url: 'static/img/arrow-down.png'
+
+// MIXINS
+@mixin border-sizing($value: border-box) {
+	-webkit-box-sizing: $value;
+	-moz-box-sizing: $value;
+	-ms-box-sizing: $value;
+	box-sizing: $value;
+}
+
+@mixin box-shadow($shadow: 0 0 4px #aaa) {
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	-ms-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+@mixin border-radius($radius: 5px) {
+	-moz-border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-ms-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin opacity($opacity: .8) {
+	-moz-opacity: $opacity;
+	-webkit-opacity: $opacity;
+	-ms-opacity: $opacity;
+	opacity: $opacity;
+}

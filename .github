@@ -1,0 +1,15 @@
+.*
+*.pyc
+/sqlite.db*
+/db.sqlite*
+/env
+/_static
+/static
+settings_local.py
+/wsgi.py
+/nocheckin
+/media
+/data
+cache
+/coverage_report
+/deck

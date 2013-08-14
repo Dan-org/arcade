@@ -1,0 +1,259 @@
+{% extends 'playpolitics/gamelayout.html' %}
+
+
+{% block head %}
+
+  <script>
+    WEB_SOCKET_SWF_LOCATION="{{ STATIC_URL }}lib/WebSocketMain.swf";        
+    USER_ID="{{ user.id }}"             // this is the primary key of the user
+    NICKNAME="{{ user.username }}";    // this will be the user's screen name, must be unique for game    
+  </script> 
+
+{% endblock %}
+
+{% block bodyclass %}{% endblock %}
+
+
+{% block content%}
+<div class="wrapper clearfix">
+  <article>
+
+    <div id="rooms">
+        <img src="{{ STATIC_URL }}img/octopus.png"/>
+        <h1>State of Nature</h1>
+        <h4>Join a game or create a new one</h4>
+        
+        <!--  ROOMS LISTING -->
+        <div id="room_list">     
+          <hgroup>(There are currently no rooms! Add one below)</hgroup> 
+        </div>
+
+         <!--  url 'createroom'  -->
+         <hgroup>
+          <input type="text" id="create_room_name" maxlength="10" size="10" >
+          <input type="submit" id="create_room_button" value="Add Room">
+        </hgroup>
+    </div> <!-- rooms -->
+
+
+    <div class="lobby">
+      <img src="{{ STATIC_URL }}img/octopus.png"/>
+      <h1>State of Nature</h1>
+      <h4>Start the game once all the players are here.</h4>
+    </div>
+
+    
+
+    <div id="gameboard" >   
+
+      <div class="wrapper clearfix">
+        <div class="two-col-header">
+          <article>
+            <img src="{{ STATIC_URL }}img/octopusSmall.png"/>
+          </article>
+          <div class="aside">
+            
+            <h2>State of Nature</h2>
+            <h4>Richest player wins</h4>
+
+          </div>
+        </div>       
+      </div>
+      
+      <table id="nature-table" class="scoreboard">    
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th colspan="2" class="underline round0">Round 1</th>
+                <th class="narrow"></th>
+                <th colspan="2" class="underline round1">Round 2</th>
+                <th class="narrow"></th>
+                <th colspan="2" class="underline round2">Round 3</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th class="round0">Decision</th>
+                <th class="round0">Final $</th>
+                <th></th>
+                <th class="round1">Decision</th>
+                <th class="round1">Final $</th>
+                <th></th>
+                <th class="round2">Decision</th>
+                <th class="round2">Final $</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td class="arrow">&gt;&gt;&gt;</td>
+              <td class="player">Player 1</td>
+              <td class="round0 decision">Invest</td><td class="round0 money">60</td><td></td>
+              <td class="round1 decision">Attack</td><td class="round1 money">60</td><td></td>
+              <td class="round2 decision">Enslave</td><td class="round2 money">0</td>
+            </tr>
+            <tr>
+              <td class="arrow">&gt;&gt;&gt;</td>
+              <td class="player"></td>
+              <td class="round0 decision"></td><td class="round0 money"></td><td></td>
+              <td class="round1 decision"></td><td class="round1 money"></td><td></td>
+              <td class="round2 decision"></td><td class="round2 money"></td>
+            </tr>
+            <tr>
+              <td class="arrow">&gt;&gt;&gt;</td>
+              <td class="player"></td>
+              <td class="round0 decision"></td><td class="round0 money"></td><td></td>
+              <td class="round1 decision"></td><td class="round1 money"></td><td></td>
+              <td class="round2 decision"></td><td class="round2 money"></td>
+            </tr>
+            <tr>
+              <td class="arrow">&gt;&gt;&gt;</td>
+              <td class="player"></td>
+              <td class="round0 decision"></td><td class="round0 money"></td><td></td>
+              <td class="round1 decision"></td><td class="round1 money"></td><td></td>
+              <td class="round2 decision"></td><td class="round2 money"></td>
+            </tr>
+            <tr>
+              <td class="arrow">&gt;&gt;&gt;</td>
+              <td class="player"></td>
+              <td class="round0 decision"></td><td class="round0 money"></td><td></td>
+              <td class="round1 decision"></td><td class="round1 money"></td><td></td>
+              <td class="round2 decision"></td><td class="round2 money"></td>
+            </tr>
+            <tr>
+              <td class="arrow">&gt;&gt;&gt;</td>
+              <td class="player"></td>
+              <td class="round0 decision"></td><td class="round0 money"></td><td></td>
+              <td class="round1 decision"></td><td class="round1 money"></td><td></td>
+              <td class="round2 decision"></td><td class="round2 money"></td>
+            </tr>
+            <tr>
+              <td class="arrow">&gt;&gt;&gt;</td>
+              <td class="player"></td>
+              <td class="round0 decision"></td><td class="round0 money"></td><td></td>
+              <td class="round1 decision"></td><td class="round1 money"></td><td></td>
+              <td class="round2 decision"></td><td class="round2 money"></td>
+            </tr>
+        </tbody>
+      </table>
+      
+      <table id="nature-actions">
+        <tr>
+          <td><input type="submit" id="investButton" value="Invest"></td>
+          <td></td>
+          <td></td>          
+          <td>Invest at 10% interest</td>
+        </tr>
+        <tr>
+          <td><input type="submit" id="attackButton" value="Attack" /></td>
+          <td></td>
+          <td><div class="styled-select"><select id="attackPlayer"></select></div></td>          
+          <td>Take $20 from poorer player</td>      
+        </tr>
+        <tr>
+          <td><input type="submit" id="enslaveToButton" value="Enslave" /></td>
+          <td>to: </td>      
+          <td><div class="styled-select"><select id="enslaveToPlayer"></select></div></td>          
+          <td>Give all money to master & live if he does</td>      
+        </tr>
+        <tr>
+          <td><input type="submit" id="giveToButton" value="Give" /></td>
+          <td><input type="number" id="giveToAmount" value="0" min="0" /> to: </td>
+          <td><div class="styled-select"><select id="giveToPlayer" ></select></div></td>          
+          <td>Give money to another player</td>      
+        </tr>
+      </table>     
+
+    </div> <!-- gameboard -->
+
+
+    <!-- game over -->
+    <div id="gameover">        
+      <h2 id="win-text"><span class="winner">Player X</span> wins</h2>  
+    </div>
+
+
+    <!-- chat -->
+    <div id="chat">
+      <div id="connecting">
+        <div class="wrap">Connecting to socket.io server</div>
+      </div>
+      <div id="messages">
+        <div id="nicknames"><span>Online:</span></div>
+        <div id="lines"></div>
+      </div>
+      <form id="send-message">
+        <input type="text" id="message">
+        <button>Send</button>
+      </form>
+    </div>
+    
+    <div class="lobby">
+      <hgroup>
+        <input type="submit" id="start_game_button" value="Start game" >
+      </hgroup>
+    </div> <!-- lobby -->  
+
+    <!-- RULES -->
+    <div id="info">   
+
+      <hgroup>
+        <a id="goals-link">GOAL</a> * <a id="game-link">THE GAME</a> * <a id="rules-link">RULES</a>
+      </hgroup>
+      
+      <div id="goals">
+          <p>The goal of each team is to survive and acquire the most property. The winning team will be the one that survives the game with the most property.</p>
+      </div>
+
+      <div id="game" >
+        <p>There are two important features to this game.</p>
+        <p>First, as in life, there is inequality.
+        There are seven teams and each team receives an assigned amount of property (dollars).
+        Some teams will begin with a lot of property, but other teams will have very little.</p>
+        <p>The second important feature of the game is that there is no government, authority, or enforcer to ensure that teams fulfill their promises.
+        You must rely on your own power or the support of others to stay alive and prosper.
+        You are free to make agreements with other teams, but you are not bound to keep those agreements or promises.
+        What will you do without a government?
+        One option is to work to increase your property.
+        Another option is to use your power against other players who are weaker than you by stealing from them or eliminating them.  Or, you may want to give all of your property to a stronger team in exchange for its protection.
+        The choice is yours.</p>
+        <p>You are welcome to form a coalition with another team.
+        You may even pay another team in exchange for some protection.
+        However, if another team promises you something and then reneges on the promise, there is no government to punish that team.</p>
+        <p>"Slavery" in this game means that you have no property and some other team determines your fate.
+        Entering into slavery is a serious decision to make.
+        Once you become enslaved, you cannot take back your property.
+        If the team that you just sold yourself to is eliminated, then you are eliminated.
+        If the team makes a decision you disagree with, you must live with it.</p>
+        <p>In real life, people can make decisions at any time.
+        However a game like this could get unruly and out of hand without some sort of order.
+        To help things move smoothly, teams must make decisions one-at-a-time, in order from poorest team to wealthiest team.
+        In Round 1, Team 1, makes the first decision because it is the poorest team, followed by Team 7 and ending with Team 3.
+          The order of decision in the second and third rounds will also be in order from poorest to wealthiest team.</p>
+      </div>
+      
+      <div id="rules">
+        <p>There are 3 rounds in this game.
+        At the beginning of each round, teams will be asked (in order from poorest to wealthiest team as of the start of the round) what they want to do.
+        Each team has four choices:</p>
+        <ol>
+          <li>Invest your property and receive a 10% return.</li>
+          <li>Give some of your property to another team as part of an agreement.</li>
+          <li>Sell yourself into slavery by giving all of your property to another team.
+          This means that you will continue to live as long as they do, but you will have zero property for the rest of the game.</li>
+          <li>Attack a team with less property and take up to $20 from that team.
+          If the team being attacked is left with no money, then they are eliminated from the game.</li>
+        </ol>
+        <p>For example, Team 3 starts with $70.
+        It could choose to invest and would then have $77 at the end of the round.
+        If it chooses to attack another team such as Team 2, then it could take $20 from Team 2 and end the round with $90, leaving Team 2 with only $20.  If Team 3 attacked Team 7 instead of Team 2, then Team 7 would have no property left and would be eliminated from the game.</p>
+        <p>Once a decision is made, the property changes take place immediately.
+        For example, if Team 2 attacks Team 5 in the round, then Team 2 would immediately increase its property from $40 to $60 and Team 5 would decrease its property from $30 to $10.  Team 6 would make the next decision.  Because Team 2 would now have $60, Team 6 could no longer attack Team 2; it must attack a team with less than $50.  If it decided to attack Team 5, then Team 5 would be eliminated form the game, and Team 6 would receive $10 more in property.</p>
+        <p><b>Any team with no property is eliminated!</b></p>
+      </div>
+      
+    </div> <!-- rules -->
+
+  </div>
+</div>
+{% endblock %}
