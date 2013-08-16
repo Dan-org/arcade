@@ -4,9 +4,10 @@ import django
 
 from socketio.namespace import BaseNamespace
 
-from playpolitics.mixins import RoomsMixin, BroadcastMixin
-from playpolitics.sdjango import namespace
-from playpolitics.models import Player, Room, Game, StateOfNatureVo, Zone
+from arcade.mixins import RoomsMixin, BroadcastMixin
+from arcade.sdjango import namespace
+from arcade.models import Player, Room, Game
+from .models import StateOfNatureVo, PlayerVo
 
 
 @namespace('/chat')
@@ -67,14 +68,12 @@ class PlaypoliticsNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
 		return True
 
 
-	def on_enter_zone(self):		
-		zone, created = Zone.objects.get_or_create(name='State of Nature')		
+	def on_enter_zone(self):				
 		self.emit('enter_zone', self._get_rooms())
 
 
 	def on_create_room(self, room_name):
-		zone = Zone.objects.get(name='State of Nature')
-		room, created = Room.objects.get_or_create(name=room_name, zone=zone)		
+		room, created = Room.objects.get_or_create(name=room_name)		
 		self.broadcast_event('room_created', self._get_rooms())
 
 

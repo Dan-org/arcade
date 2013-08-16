@@ -1,0 +1,21 @@
+{% load compress %}
+
+
+{% compress css %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/playpolitics.sass" type="text/sass">  
+{% endcompress %}
+
+
+{% compress js %}
+  <script type="text/javascript" src="{{ STATIC_URL }}lib/jquery-1.9.0.min.js"></script>  
+  <script type="text/javascript" src="{{ STATIC_URL }}lib/jquery.pulse.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}lib/socket.io.js"></script>
+
+  <script type="text/javascript" src="{{ STATIC_URL }}js/addLoadEvent.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/chat.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/PlayerVo.js"></script>  
+  <script type="text/javascript" src="{{ STATIC_URL }}js/StateOfNatureVo.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/stateofnature.js"></script>
+{% endcompress %}
+
+

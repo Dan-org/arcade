@@ -5,66 +5,6 @@ import jsonfield
 import json
 import sys
 
-class Zone(models.Model):
-	"""
-	Zone is a collection of rooms.
-	"""
-	name = models.CharField(max_length=20)
-
-	def __unicode__(self):
-		return self.name
-
-
-class Player(models.Model):
-	"""
-	Associates a user with a nickname to avoid custom user model issues.
-	"""
-	user 		= models.ForeignKey(settings.AUTH_USER_MODEL)
-	nickname 	= models.CharField(max_length=24)
-
-
-class Room(models.Model):
-	"""
-	Room is a collection of users that can chat and play a game.
-	"""
-	zone 	= models.ForeignKey(Zone, related_name="rooms")
-	name 	= models.CharField(max_length=20)
-	slug 	= models.SlugField(blank=True)    
-	players = models.ManyToManyField(Player, blank=True, null=True, related_name="rooms_joined")
-	is_open = models.BooleanField(default=True)
-
-	class Meta:
-		ordering = ("name",)
-
-	def __unicode__(self):
-		return self.name
-
-	@models.permalink
-	def get_absolute_url(self):
-		return ("room", (self.slug,))
-
-	def save(self, *args, **kwargs):
-		if not self.slug:
-			self.slug = slugify(self.name)
-		super(Room, self).save(*args, **kwargs)
-
-
-class Game(models.Model):
-	"""
-	Stores data about a game.
-	"""
-	room 	= models.ForeignKey(Room, related_name="stateOfNatureGames")
-	type	= models.CharField(max_length=20) 
-	json	= jsonfield.JSONField()
-
-	def __unicode__(self):
-		return "Game type=%s room=%s" % (self.type, self.room.name)
-
-	@models.permalink
-	def get_absolute_url(self):
-		return ("game", (str(self.id)))
-
-
 
 # ------------------------------
 #  STATE OF NATURE models

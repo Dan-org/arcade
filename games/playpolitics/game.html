@@ -1,20 +1,3 @@
-{% extends 'playpolitics/gamelayout.html' %}
-
-
-{% block head %}
-
-  <script>
-    WEB_SOCKET_SWF_LOCATION="{{ STATIC_URL }}lib/WebSocketMain.swf";        
-    USER_ID="{{ user.id }}"             // this is the primary key of the user
-    NICKNAME="{{ user.username }}";    // this will be the user's screen name, must be unique for game    
-  </script> 
-
-{% endblock %}
-
-{% block bodyclass %}{% endblock %}
-
-
-{% block content%}
 <div class="wrapper clearfix">
   <article>
 
@@ -251,9 +234,9 @@
         For example, if Team 2 attacks Team 5 in the round, then Team 2 would immediately increase its property from $40 to $60 and Team 5 would decrease its property from $30 to $10.  Team 6 would make the next decision.  Because Team 2 would now have $60, Team 6 could no longer attack Team 2; it must attack a team with less than $50.  If it decided to attack Team 5, then Team 5 would be eliminated form the game, and Team 6 would receive $10 more in property.</p>
         <p><b>Any team with no property is eliminated!</b></p>
       </div>
-      
     </div> <!-- rules -->
 
-  </div>
+  </article>
 </div>
-{% endblock %}
+
+

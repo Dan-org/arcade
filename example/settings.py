@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'example',    
-    'playpolitics',    
+    'arcade',    
     
     # 3rd party    
     'compressor',
@@ -96,6 +96,8 @@ USE_TZ = True
 
 STATICFILES_DIRS = (
   os.path.join(ROOT, 'static/'),
+  os.path.join(ROOT, 'arcade/static/'),
+  os.path.join(ROOT, 'games/playpolitics/static/'),
 )
 
 # Static files (CSS, JavaScript, Images)
@@ -103,14 +105,23 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
+# this tells arcade where to look for gamd dirs.
+
+ARCADE_DIR = os.path.join(ROOT, 'games/')
+
+
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-STATICFILES_FINDERS
 # Warning: Do not put more entries here without talking to Brant.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',    
 
+    'arcade.finders.ArcadeDirectoriesFinder',
+
     # Django Compressor
     'compressor.finders.CompressorFinder',
+
+ 
 )
 
 ### DJANGO COMPRESSOR ###

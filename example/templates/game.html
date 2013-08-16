@@ -1,0 +1,43 @@
+{% load arcade %}
+
+<!DOCTYPE html>
+<html>
+  	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	    <meta name="viewport" content="width=device-width">
+		
+
+		  <script>
+		    WEB_SOCKET_SWF_LOCATION="{{ STATIC_URL }}lib/WebSocketMain.swf";        
+		    USER_ID="{{ user.id }}"             // this is the primary key of the user
+		    NICKNAME="{{ user.username }}";    // this will be the user's screen name, must be unique for game    
+		  </script> 
+
+		<!--
+		<script type="text/javascript" src="{{ STATIC_URL }}arcade/arcade.js" ></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}lib/jquery-1.9.0.min.js" ></script>
+		<script type="text/javascript" >		
+			GAME = "stateofnature"
+
+			$(window).load(function() {  				
+				setup_game(GAME);
+			});
+		</script>
+	-->
+		{% gamepieces 'playpolitics' %}
+	</head>
+
+	<body>
+		{% gameboard 'playpolitics' %}
+
+		<!--
+		<div id="arcade">
+			<p>PUT GAME HERE</p>
+		</div>
+		<div>
+			A footer
+		</div>		
+	-->
+	</body>
+</html>

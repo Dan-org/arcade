@@ -4,9 +4,9 @@ Playing politics setup.
 
 from setuptools import setup, find_packages
 
-setup( name='play-politics',
+setup( name='arcade',
        version='0.1',
-       description='Loft multiplayer political games.',
+       description='Loft app for multiplayer games.',
        author='Matt Easterday',
        author_email='easterday@northwestern.edu',
        packages = find_packages(),
