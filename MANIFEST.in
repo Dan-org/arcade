@@ -1,1 +1,2 @@
-recursive-include playpolitics/static *
+recursive-include arcade/static *
+recursive-include arcade/templates *
