@@ -10,7 +10,9 @@ import sys
 class Game(models.Model):
 	""" Game represents a type of game that can be downloaded via a repository and played on the loft. """
 	name 		= models.CharField(max_length=20)
-	repository 	= models.URLField(max_length=200)
+	dir 		= models.SlugField()	
+	#repository 	= models.URLField(max_length=200)
+	repository 	= models.CharField(max_length=200)
 
 	class Meta:
 		ordering = ("name",)
@@ -32,12 +34,14 @@ class Player(models.Model):
 	def __unicode__(self):
 		return self.nickname
 
+
 class Room(models.Model):
-	""" Room represents a group of players that want to play a particular type of game """
+	""" Room represents a group of players that want to play a particular type of game """	
 	game 	= models.ForeignKey(Game, related_name="rooms")
 	name 	= models.CharField(max_length=24)
 	players = models.ManyToManyField(Player, blank=True, null=True, related_name="rooms_joined")
 	is_open = models.BooleanField(default=True)
+	json	= jsonfield.JSONField()
 
 	class Meta:
 		ordering = ("name",)

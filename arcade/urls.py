@@ -16,4 +16,5 @@ urlpatterns = patterns('',
 
     url(r'^fetchgame/(?P<game_id>\d+)',  'arcade.views.fetchgame', name="fetchgame"),
 
+    
 )
