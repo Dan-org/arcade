@@ -13,4 +13,7 @@ urlpatterns = patterns('',
     #url(r'^playpolitics/$', 		       TemplateView.as_view(template_name='playpolitics/index.html')),
     #url(r'^playpolitics/stateofnature/$',  'example.views.stateofnature', name="stateofnature"),
     url("^socket\.io",                      include(arcade.sdjango.urls)),
+
+    url(r'^fetchgame/(?P<game_id>\d+)',  'arcade.views.fetchgame', name="fetchgame"),
+
 )

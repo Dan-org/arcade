@@ -32,7 +32,7 @@
     
     // ADD ROOM BUTTONS    
     $('#create_room_button').click(function (event){
-        var roomname = $("#create_room_name").val();          
+        var roomname = $("#create_room_name").val();              
         $('#create_room_name').val('');
         politicssocket.emit('create_room', roomname);
     });

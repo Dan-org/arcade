@@ -73,6 +73,7 @@ class PlaypoliticsNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
 
 
 	def on_create_room(self, room_name):
+		print("roomname %s" % room_name)
 		room, created = Room.objects.get_or_create(name=room_name)		
 		self.broadcast_event('room_created', self._get_rooms())
 
