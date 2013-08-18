@@ -35,34 +35,22 @@ def autodiscover():
         return
     LOADING_SOCKETIO = True
 
-
-    arcade_dir  = settings.ARCADE_DIR[:-1]
-    arcade_base = os.path.basename(arcade_dir)
+    
+    arcade_base = os.path.basename(settings.ARCADE_PATH)
     import_module(arcade_base)
-    print "arcade at: %s" % arcade_dir
-    for game in os.walk(settings.ARCADE_DIR).next()[1]:  #all the subdirs of ARCADE_DIR
-        game_path = "%s%s" % (settings.ARCADE_DIR, game)
+    print "arcade at: %s" % settings.ARCADE_PATH
+    for game in os.walk("%s" % settings.ARCADE_PATH).next()[1]:  #all the subdirs of ARCADE_DIR
+        game_path = "%s/%s" % (settings.ARCADE_PATH, game)        
         try:
             imp.find_module('sockets', [game_path])     
-            print "yay"        
+            print "found: %s" % game        
         except ImportError:   
-            print "boo"
+            print "couldn't import: %s" % game
             continue
         import_module("%s.%s.%s" % (arcade_base, game, 'sockets'))
 
     LOADING_SOCKETIO = False
 
-
-
-def findSubdirectoryWith(filename, subdirectory=''):
-    if subdirectory:
-        path = subdirectory
-    else:
-        path = os.getcwd()
-    for root, dirs, names in os.walk(path):
-        if filename in names:
-            return os.path.join(root, filename)
-    raise 'File not found'
 
 
 class namespace(object):

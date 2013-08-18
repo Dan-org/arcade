@@ -35,7 +35,7 @@ class PiecesTag(ttag.Tag):
         data = self.resolve(context)   
         game = data['game']
         #game_dir = "/%s%s/" % (settings.ARCADE_URL, game)
-        url = "%s%s/assets.html" % (settings.ARCADE_DIR, game)
+        url = "%s/%s/assets.html" % (settings.ARCADE_PATH, game)
         text = open(url, 'rb').read()
         t = Template(text)
         c = Context({ 'STATIC_URL' : '/static/' })        
@@ -57,7 +57,7 @@ class GameboardTag(ttag.Tag):
         data = self.resolve(context)  
         game = data['game']
         #game_dir = "/%s%s/" % (settings.ARCADE_URL, game)
-        url = "%s%s/game.html" % (settings.ARCADE_DIR, game)
+        url = "%s/%s/game.html" % (settings.ARCADE_PATH, game)
         text = open(url, 'rb').read()
         t = Template(text)
         c = Context({ 'STATIC_URL' : '/static/' })

@@ -107,7 +107,7 @@ STATIC_URL = '/static/'
 
 # this tells arcade where to look for gamd dirs.
 
-ARCADE_DIR = os.path.join(ROOT, 'games/')
+ARCADE_PATH = os.path.join(ROOT, 'games')
 
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-STATICFILES_FINDERS

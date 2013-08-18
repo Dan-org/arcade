@@ -44,8 +44,8 @@ class ArcadeDirectoriesFinder(BaseFinder):
 		#if games is None:
 		#    games = settings.INSTALLED_APPS
 		if games is None:
-			arcade_base_dir = os.path.basename(settings.ARCADE_DIR[:-1])
-			games = os.walk(settings.ARCADE_DIR).next()[1]  #all the subdirs of ARCADE_DIR
+			arcade_base_dir = os.path.basename(settings.ARCADE_PATH)
+			games = os.walk("%s" % settings.ARCADE_PATH).next()[1]  #all the subdirs of ARCADE_DIR
 			games = [ arcade_base_dir + "."  + game  for game in games]
 
 		for game in games:
