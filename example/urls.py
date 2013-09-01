@@ -10,4 +10,9 @@ urlpatterns = patterns('',
     url(r'^game/$', 		       'example.views.somegame'),
     
     url(r'',                include('arcade.urls')),
+
+
+    
+    # Deck
+    url(r'^deck/', include('deck.urls')),
 )

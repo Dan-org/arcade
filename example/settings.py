@@ -43,7 +43,8 @@ INSTALLED_APPS = (
     'example',    
     'arcade',    
     
-    # 3rd party    
+    # 3rd party  
+    'deck',
     'compressor',
 )
 
@@ -105,8 +106,11 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
-# this tells arcade where to look for gamd dirs.
 
+### DECK FILES ###
+DECK_PATH = os.path.join(ROOT, 'decks')
+
+# this tells arcade where to look for gamd dirs.
 ARCADE_PATH = os.path.join(ROOT, 'games')
 
 
@@ -129,5 +133,12 @@ STATICFILES_FINDERS = (
 COMPRESS_PRECOMPILERS = (
     ('text/sass', 'example.processors.SassFilter'),
 )
+
+### FIXTURES ###
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
+FIXTURE_DIRS = (
+    normpath(join(ROOT, 'example', 'fixtures')),
+)
+
 
 

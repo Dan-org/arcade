@@ -13,6 +13,9 @@ class Game(models.Model):
 	dir 		= models.SlugField()	
 	#repository 	= models.URLField(max_length=200)
 	repository 	= models.CharField(max_length=200)
+	
+	min_players = models.IntegerField(default=1)		# let instructor set this so we can switch between testing / production / and different classes?
+	max_players = models.IntegerField(default=10)
 
 	class Meta:
 		ordering = ("name",)
@@ -35,13 +38,23 @@ class Player(models.Model):
 		return self.nickname
 
 
+ROOM_STATES = (
+    ('getting-ready', 	"getting ready"), 	# Players are joining game, but hasn't started yet
+    ('in-progress', 	"in progress"),     # Game has started
+    ('over', 			"over"),       		# Game is over
+)
+
 class Room(models.Model):
 	""" Room represents a group of players that want to play a particular type of game """	
 	game 	= models.ForeignKey(Game, related_name="rooms")
 	name 	= models.CharField(max_length=24)
-	players = models.ManyToManyField(Player, blank=True, null=True, related_name="rooms_joined")
-	is_open = models.BooleanField(default=True)
-	json	= jsonfield.JSONField()
+	players = models.ManyToManyField(Player, blank=True, null=True, related_name="rooms_joined")	
+	json	= jsonfield.JSONField()	
+	status 	= models.SlugField(choices=ROOM_STATES, default='getting-ready') # -- be nice and set this so arcade can clean up game and display stuatus	
+
+	#is_joinable = models.BooleanField(default=True) -- this is actually a property of the status, player and gametime, so  can't really set it here
+	#can_watch 
+	
 
 	class Meta:
 		ordering = ("name",)
@@ -52,3 +65,4 @@ class Room(models.Model):
 	#@models.permalink
 	#def get_absolute_url(self):
 	#	return ("room", (self.slug,))
+	

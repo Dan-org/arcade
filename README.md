@@ -25,7 +25,7 @@ Step 3:
 If not done already, install libevent library.  If you have homebrew installed on mac, you can do:
 > brew install libevent
 
-Step 3:
+Step 4:
 Install the project requirements.  Make sure you see "Successfully installed ..." at the end.  Otherwise check troubleshooting, below.
 
   > env/bin/pip install -r requirements.txt
@@ -33,7 +33,7 @@ Install the project requirements.  Make sure you see "Successfully installed ...
   Successfully installed Django
   Cleaning up...
 
-Step 4:
+Step 5:
 
   > ./manage.py syncdb
   Ceating tables ...
@@ -42,7 +42,14 @@ Step 4:
 
 It will ask you to create a user, go ahead and create one for yourself.  That user will only be local to *your* machine so don't expect it to be anywhere else.  If this fails, or you want to create a user later see "Creating An Admin User Via The Command Line", below.  Also, there is by default a user with email "admin@designforamerica.com" and password "pass".
 
-Step 5:
+
+STEP 6: 
+Load testing data, specifically the games and users
+> ./manage.py loaddata users
+> ./manage.py loaddata games
+
+
+Step 7:
   
   > ./manage.py runserver
   ...
@@ -53,14 +60,25 @@ This will start up the server, running.  Visit http://127.0.0.1:8000/ in your br
 Changes you make should automatically update the server, but if sometimes it needs to be rebooted.
 
 
-Step 5b:
+Step 8:
   To run the playpolitics game, you need to run sockets -- on your local development environment, instead of using runserver, you can use:
 
   > ./manage.py runserver_socketio
+
+
+Step 9: 
+  Sign in on one browser with admin/pass and another browser with matt/pass
+
+
 
 Troubleshooting
 -----------------------------
 Sometimes after step 3 "env/bin/pip install -r requirements.txt"
 
 
+SETUP State of Nature
+-------------------------
+Name:         State of Nature
+Dir:          playpolitics
+Repository:   git@github.com:Dan-org/playpolitics.git
 

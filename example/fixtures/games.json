@@ -1,0 +1,1 @@
+[{"pk": 1, "model": "arcade.game", "fields": {"repository": "git@github.com:Dan-org/playpolitics.git", "name": "State of Nature", "dir": "playpolitics"}}]

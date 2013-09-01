@@ -1,4 +1,6 @@
+pillow
 -e git+https://github.com/django/django.git@6a092f24e01b6448f4e5601968db82720c9397de#egg=Django-dev
+-e git+https://github.com/DeadWisdom/django-deck.git#egg=deck
 
 gevent-socketio
 jsonfield==0.9.2
@@ -8,3 +10,4 @@ django-ttag         # to support template tags in content_tags
 django_compressor
 -e git://github.com/DeadWisdom/pyScss.git#egg=pyscss
 BeautifulSoup       # For Django Compressor
+
